@@ -106,9 +106,6 @@ public class MagnetPull implements SensorEventListener, Choreographer.FrameCallb
                     pullLayout((CellLayout) page, p, cx, cy);
                 }
             }
-            if (mWorkspace.getHotseat() != null) {
-                pullLayout(mWorkspace.getHotseat(), p, cx, cy);
-            }
         } else if (mTouched) {
             mTouched = false;
             reset();
@@ -137,7 +134,6 @@ public class MagnetPull implements SensorEventListener, Choreographer.FrameCallb
             View page = mWorkspace.getChildAt(i);
             if (page instanceof CellLayout) clearLayout((CellLayout) page);
         }
-        if (mWorkspace.getHotseat() != null) clearLayout(mWorkspace.getHotseat());
     }
 
     private void clearLayout(CellLayout layout) {
