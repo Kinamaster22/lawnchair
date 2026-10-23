@@ -239,6 +239,7 @@ public class Workspace<T extends View & PageIndicator> extends PagedView<T>
 
     @Thunk
     final Launcher mLauncher;
+    private MagnetPull mMagnetPull;
     @Thunk
     DragController mDragController;
 
@@ -1666,12 +1667,15 @@ public class Workspace<T extends View & PageIndicator> extends PagedView<T>
         mWallpaperOffset.setWindowToken(getWindowToken());
         computeScroll();
         mLauncher.getStateManager().addStateListener(mAccessibilityDropListener);
+        if (mMagnetPull == null) mMagnetPull = new MagnetPull(this);
+        mMagnetPull.start();
     }
 
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
         mWallpaperOffset.setWindowToken(null);
         mLauncher.getStateManager().removeStateListener(mAccessibilityDropListener);
+        if (mMagnetPull != null) mMagnetPull.stop();
     }
 
     @Override
